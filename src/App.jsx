@@ -1,13 +1,11 @@
-
+import Hero from './components/sections/Hero'
 
 const App = () => {
   return (
-    <main>
-      <div className="">
-        <h1 className="">Welcome To my Portfolio</h1>
-      </div>
-    </main>
+    <>
+      <Hero />
+    </>
   )
-}
+} 
 
 export default App
