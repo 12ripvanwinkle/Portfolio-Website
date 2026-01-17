@@ -1,84 +1,95 @@
-// Importing an array of words (used for the sliding text animation)
+import React from 'react'
+
+// Importing the array of words used for the sliding/animated text
 import { words } from '../../constants'
-// Importing a reusable Button component
+
+// Importing the reusable Button component
 import Button from '../Button'
 
-// This is a React functional component called "Hero"
+// Hero component = the top section of the website
 const Hero = () => {
   return (
-    // Main hero section container
+    // Main container for the hero section
     <section id='hero' className='relative overflow-hidden'>
-      
-      {/* Background image positioned at the top-left */}
-      <div className="absolute top-0 left-0 z-10">
-        <img src="/images/bg.png" alt="background" />
-      </div>
 
-      {/* Main layout wrapper */}
-      <div className="hero-layout">
+        {/* Background image container (positioned absolutely) */}
+        <div className="absolute top-0 left-0 z-10">
+            <img src="/images/bg.png" alt="background" className=''/>
+        </div>
 
-        {/* Left side content (text + button) */}
-        <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5">
+        {/* Wrapper for the hero layout (left + right sections) */}
+        <div className="hero-layout">
 
-          <div className="flex flex-col gap-7">
+          {/* Left side stuff */}
+          <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5">
+            {/* 
+              flex flex-col  → stack items vertically
+              justify-center → center content vertically
+              md:px-20 / px-5 → padding for different screen sizes
+            */}
 
-            {/* Main heading text */}
-            <div className="hero-text">
-              <h1>
-                Shaping 
+            <div className="flex flex-col gap-7">
+              {/* gap-7 adds space between the child elements */}
 
-                {/* Animated / sliding word section */}
-                <span className='slide'>
-                  <span className="wrapper">
+              {/* Container for the main headline text */}
+              <div className="hero-text">
 
-                    {/* Loop through the words array and display each word + image */}
-                    {words.map((words) => (
-                      <span
-                        key={words.text} // React requires a unique key for lists
-                        className='flex items-center md:gap-3 gap-1 pb-2'
-                      >
+                <h1 className="">
+                  Shaping 
 
-                        {/* Small icon/image for the word */}
-                        <img
-                          src={words.imgPath}
-                          alt={words.text}
-                          className='xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white-50'
-                        />
+                  {/* Sliding / animated word section */}
+                  <span className='slide'>
+                    <span className="wrapper">
 
-                        {/* The actual word text */}
-                        <span>{words.text}</span>
-                      </span>
-                    ))}
+                      {/* Loop through the "words" array and render each word */}
+                      {words.map((words) => (
+                        <span
+                          key={words.text} // Required by React to uniquely identify each item
+                          className='flex items-center md:gap-3 gap-1 pb-2'
+                        >
 
+                          {/* Icon/image that belongs to the word */}
+                          <img
+                            src={words.imgPath}
+                            alt={words.text}
+                            className='xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white-50'
+                          />
+
+                          {/* The word text itself */}
+                          <span>{words.text}</span>
+
+                        </span>
+                      ))}
+                    </span>
                   </span>
-                </span>
-              </h1>
+                </h1>
 
-              <h1>Into Real Projects</h1>
-              <h1>That Deliver Results</h1>
+                {/* Supporting headline lines */}
+                <h1 className="">Into Real Projects</h1>
+                <h1 className="">That Deliver Results</h1>
+
+              </div>
+
+              {/* Short description under the headline */}
+              <p className='text-white-50 md:text-xl relative z-10 pointer-events-none'>
+                  Hi, I'm "Insert Name" with a passion for coding 
+              </p>
+
+              {/* Reusable Button component */}
+              <Button
+                className="md:w-80 md:h-16 w-60 h-12"
+                id="button"
+                text="see my work"
+              />
+
             </div>
+          </header>
 
-            {/* Short description text */}
-            <p className='text-white-50 md:text-xl relative z-10 pointer-events-none'>
-              Hi, I'm "Insert Name" with a passion for coding
-            </p>
-
-            {/* Custom button component */}
-            <Button
-              className="md:w-80 md:h-16 w-60 h-12"
-              id="button"
-              text="see my work"
-            />
-
-          </div>
-        </header>
-
-        {/* Right side content could go here later */}
-
-      </div>
+          {/* Right side stuff */}
+          
+        </div>
     </section>
   )
 }
 
-// Exporting the component so other files can use it
 export default Hero
