@@ -7,8 +7,38 @@ import { words } from '../../constants'
 import Button from '../Button'
 import HeroExperience from '../HeroModels/HeroExperience'
 
+// Import the GSAP React hook (runs animations safely inside React)
+import { useGSAP } from '@gsap/react';
+
+// Import the GSAP animation library
+import gsap from 'gsap';
+// Import your animated counter component
+import AnimatedCounter from '../AnimatedCounter';
+
 // Hero component = the top section of the website
 const Hero = () => {
+
+  // Run GSAP animations when this component mounts
+  useGSAP(() => {
+  // Animate all <h1> elements inside an element with class "hero-text"
+  gsap.fromTo(
+    '.hero-text h1',   // Target elements (CSS selector)
+    // START state (before animation)
+    {
+      y: 50,          // Move down 50px
+      opacity: 0      // Fully invisible
+    },
+    // END state (after animation)
+    {
+      y: 0,           // Back to normal position
+      opacity: 1,     // Fully visible
+      stagger: 0.2,   // Delay each <h1> slightly (0.2s apart)
+      duration: 1,   // Animation lasts 1 second
+      ease: 'power2.inOut', // Smooth easing curve
+    }
+  );
+});
+
   return (
     // Main container for the hero section
     <section id='hero' className='relative overflow-hidden'>
@@ -93,6 +123,8 @@ const Hero = () => {
             </div>
           </figure>
         </div>
+        {/* Render the animated counter component in the JSX */}
+        <AnimatedCounter />
     </section>
   )
 }

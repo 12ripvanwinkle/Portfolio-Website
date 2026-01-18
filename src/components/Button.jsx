@@ -9,6 +9,34 @@ const Button = ({ text, className, id }) => {
     // Anchor tag used to make the button clickable like a link
     <a 
       href="" 
+      onClick={(e) => {
+
+        // Prevent default button behavior (like jumping or form submit)
+        e.preventDefault();
+
+        // Find the element with id="counter"
+        const target = document.getElementById('counter');
+
+        // Only run if the element exists and the component has an id prop
+        if (target && id) {
+
+          // Create a small spacing from the top of the screen (15% of screen height)
+          const offset = window.innerHeight * 0.15;
+
+          // Calculate the exact position to scroll to
+          const top =
+            target.getBoundingClientRect().top + // distance from viewport
+            window.scrollY -                     // current scroll position
+            offset;                              // spacing from top
+
+          // Smoothly scroll to the calculated position
+          window.scrollTo({
+            top,
+            behavior: 'smooth'
+          });
+        }
+
+      }}
       // Combine passed className + default "cta-wrapper" class
       className={`${className ?? ''} cta-wrapper`}
     >
