@@ -5,6 +5,7 @@ import { words } from '../../constants'
 
 // Importing the reusable Button component
 import Button from '../Button'
+import HeroExperience from '../HeroModels/HeroExperience'
 
 // Hero component = the top section of the website
 const Hero = () => {
@@ -86,7 +87,11 @@ const Hero = () => {
           </header>
 
           {/* Right side stuff */}
-          
+          <figure>
+            <div className="hero-3d-layout">
+              <HeroExperience />
+            </div>
+          </figure>
         </div>
     </section>
   )
