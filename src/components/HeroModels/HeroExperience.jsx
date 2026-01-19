@@ -18,6 +18,10 @@ const HeroExperience = () => {
 
     // Canvas creates a 3D scene using Three.js inside React
     <Canvas camera={{position : [0, 0, 5], fov: 45}}>
+        {/* ✅ Add these lights */}
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[5, 5, 5]} intensity={1} />
+        <pointLight position={[-5, 5, 5]} intensity={0.5} />
         
         {/* 
           OrbitControls allows the user to rotate the camera around the 3D object

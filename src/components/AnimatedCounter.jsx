@@ -10,12 +10,12 @@ const AnimatedCounter = () => {
 
         {/* Grid container that holds all counter cards */}
         <div className="mx-auto grid-4-cols">
-
+          
             {/* Loop through each item in counterItems array */}
-            {counterItems.map((item) => (
+            {counterItems.map((item, index) => (
 
                 // One counter card
-                <div className="bg-zinc-900 rounded-lg p-10 flex flex-col justify-center">
+                <div key={index}  className="bg-zinc-900 rounded-lg p-10 flex flex-col justify-center">
 
                     {/* Animated number */}
                     <div

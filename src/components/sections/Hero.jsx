@@ -73,9 +73,9 @@ const Hero = () => {
                     <span className="wrapper">
 
                       {/* Loop through the "words" array and render each word */}
-                      {words.map((words) => (
+                      {words.map((words,index) => (
                         <span
-                          key={words.text} // Required by React to uniquely identify each item
+                          key={`${words.text}-${index}`} // Unique key for each word
                           className='flex items-center md:gap-3 gap-1 pb-2'
                         >
 
