@@ -1,5 +1,5 @@
 import React from 'react'
-import { logoIconsList } from '../constants'
+import { logoIconsList } from '../../constants'
 
 // Small reusable component that renders a single logo
 const LogoIcon = ({icon}) => {
