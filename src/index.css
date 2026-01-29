@@ -470,3 +470,6 @@ section {
 .card:hover::before {
   opacity: 1;
 }
+html, body, section {
+  overflow-x: hidden !important;
+}

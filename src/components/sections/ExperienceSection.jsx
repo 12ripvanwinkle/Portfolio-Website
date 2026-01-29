@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import TitleHeader from '../TitleHeader'
 import { expCards } from '../../constants'
 import GlowCard from '../GlowCard'
@@ -12,11 +12,20 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ExperienceSection = () => {
   
+  const sectionRef = useRef(null);  // ✅ Add ref for scope
+  
   // Setup animations when the component loads
   useGSAP(() => {
 
+    // ✅ Check if elements exist before animating
+    const timelineCards = gsap.utils.toArray('.timeline-card');
+    const timelineElements = gsap.utils.toArray('.timeline');
+    const expTextElements = gsap.utils.toArray('.expText');
+
+    if (timelineCards.length === 0) return;  // Exit if no elements found
+
     // Animate each timeline card when it scrolls into view
-    gsap.utils.toArray('.timeline-card').forEach((card) => {
+    timelineCards.forEach((card) => {
       gsap.from(card, {
         xPercent: -100,               // start off-screen to the left
         opacity: 0,                  // invisible at start
@@ -32,27 +41,30 @@ const ExperienceSection = () => {
       })
     })
 
-    // Animate the vertical timeline shrinking while scrolling
-    gsap.to('.timeline', {
-      transformOrigin: 'bottom bottom',
-      ease: 'power1.inOut',
+    // ✅ Only animate timeline if it exists
+    if (timelineElements.length > 0) {
+      // Animate the vertical timeline shrinking while scrolling
+      gsap.to('.timeline', {
+        transformOrigin: 'bottom bottom',
+        ease: 'power1.inOut',
 
-      scrollTrigger: {
-        trigger: '.timeline',
-        start: 'top center',
-        end: '70% center',
+        scrollTrigger: {
+          trigger: '.timeline',
+          start: 'top center',
+          end: '70% center',
 
-        // Runs continuously as user scrolls
-        onUpdate: (self) => {
-          gsap.to('.timeline', {
-            scaleY: 1 - self.progress,  // shrink line as scroll progresses
-          })
-        }
-      },
-    })
+          // Runs continuously as user scrolls
+          onUpdate: (self) => {
+            gsap.to('.timeline', {
+              scaleY: 1 - self.progress,  // shrink line as scroll progresses
+            })
+          }
+        },
+      })
+    }
 
     // Animate experience text blocks
-    gsap.utils.toArray('.expText').forEach((text) => {
+    expTextElements.forEach((text) => {
       gsap.from(text, {
         xPercent: 0,
         opacity: 0,
@@ -66,10 +78,10 @@ const ExperienceSection = () => {
       })
     })
 
-  }, []);
+  }, { scope: sectionRef });  // ✅ Add scope option
 
   return (
-    <section id='experience' className='flex-center md:mt-40 mt-20 section-padding xl:px-0'>
+    <section ref={sectionRef} id='experience' className='flex-center md:mt-40 mt-20 section-padding xl:px-0'>
       <div className="w-full h-full md:px-20 px-5">
 
         {/* Section header */}

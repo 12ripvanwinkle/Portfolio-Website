@@ -35,7 +35,7 @@ const GlowCard = ({ card, children, index }) => {
             // Track mouse movement
             onMouseMove={handleMouseMove(index)}
 
-            className="card card-border timeline-card rounded-xl p-10"
+            className="card card-border timeline-card rounded-xl p-10 mb-5 break-inside-avoid-column"
         >
             {/* Glow overlay element (styled via CSS) */}
             <div className="glow" />
